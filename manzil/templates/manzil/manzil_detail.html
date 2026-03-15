@@ -1,0 +1,70 @@
+{% extends 'manzil/base.html' %}
+
+{% block content %}
+<div class="container mt-4 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg border-0 overflow-hidden">
+
+                {% if manzil.image %}
+                    <img src="{{ manzil.image.url }}" class="card-img-top" alt="{{ manzil.name }}" style="height: 450px; object-fit: cover;">
+                {% else %}
+                    <div class="bg-light text-center py-5" style="height: 400px; display: flex; align-items: center; justify-content: center; flex-direction: column;">
+                        <i class="bi bi-image text-secondary" style="font-size: 4rem;"></i>
+                        <p class="text-muted mt-2">Rasm yuklanmagan</p>
+                    </div>
+                {% endif %}
+
+                <div class="card-body p-4">
+                    <h2 class="card-title text-primary fw-bold">{{ manzil.name }}</h2>
+                    <hr>
+
+                    <div class="mb-3 d-flex align-items-start">
+                        <i class="bi bi-geo-alt-fill text-danger me-2 mt-1"></i>
+                        <p class="mb-0"><strong>Manzil:</strong> {{ manzil.address }}</p>
+                    </div>
+
+                    {% if manzil.category %}
+                    <div class="mb-3 d-flex align-items-center">
+                        <i class="bi bi-tag-fill text-info me-2"></i>
+                        <p class="mb-0"><strong>Kategoriya:</strong>
+                            <span class="badge bg-info text-dark ms-1">{{ manzil.category.name }}</span>
+                        </p>
+                    </div>
+                    {% endif %}
+
+                    {% if manzil.description %}
+                    <div class="mb-3">
+                        <p class="mb-1"><strong><i class="bi bi-info-circle-fill text-primary me-1"></i> Batafsil ma'lumot:</strong></p>
+                        <div class="p-3 bg-light rounded shadow-sm">
+                            <p class="text-muted mb-0" style="white-space: pre-wrap; line-height: 1.6;">{{ manzil.description }}</p>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    {% if manzil.phone %}
+                    <div class="mb-3 d-flex align-items-center">
+                        <i class="bi bi-telephone-fill text-success me-2"></i>
+                        <p class="mb-0"><strong>Telefon:</strong> {{ manzil.phone }}</p>
+                    </div>
+                    {% endif %}
+
+                    <hr class="my-4">
+
+                    <div class="d-flex gap-2 justify-content-between">
+                        <a href="javascript:history.back()" class="btn btn-outline-secondary px-4 py-2">
+                            <i class="bi bi-arrow-left"></i> Orqaga
+                        </a>
+
+                        <a href="https://www.google.com/maps/search/?api=1&query={{ manzil.name|urlencode }}+Chirchiq+{{ manzil.address|urlencode }}"
+                           target="_blank"
+                           class="btn btn-success px-4 py-2 shadow">
+                            <i class="bi bi-map-fill me-1"></i> Xaritada ko'rish
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

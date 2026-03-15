@@ -1,0 +1,29 @@
+body{
+    background:#f2f2f2;
+    font-family: Arial;
+}
+
+.navbar{
+    box-shadow:0 3px 10px rgba(0,0,0,0.2);
+}
+
+.card{
+    border:none;
+    border-radius:10px;
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:scale(1.03);
+}
+
+.card img{
+    height:220px;
+    object-fit:cover;
+}
+
+.footer{
+    background:#1f1f1f;
+    color:white;
+    padding:20px;
+}

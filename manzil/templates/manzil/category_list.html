@@ -1,0 +1,15 @@
+{% extends 'manzil/base.html' %}
+
+{% block content %}
+
+<h3>Kategoriyalar</h3>
+
+{% for category in categories %}
+<p>
+    <a href="{% url 'manzil_list' category.id %}">
+        {{ category.name }}
+    </a>
+</p>
+{% endfor %}
+
+{% endblock %}
