@@ -1,40 +1,35 @@
 {% extends 'manzil/base.html' %}
-
 {% block content %}
-<div class="container mt-5">
-    <h2 class="mb-5 text-primary fw-bold text-center">
-        Chirchiq Shahar {{ category.name }}
+<div class="container mt-4">
+    <h2 class="mb-4 text-primary fw-bold text-center">
+        {% if category %} Chirchiq Shahar {{ category.name }} {% else %} Qidiruv natijalari {% endif %}
     </h2>
+
+    <div class="row justify-content-center mb-5">
+        <div class="col-md-8">
+            <form action="" method="GET" class="shadow-sm p-2 bg-white rounded-pill border d-flex">
+                <input type="text" name="q" class="form-control border-0 bg-transparent ms-3" placeholder="Ushbu bo'limdan qidirish..." value="{{ query|default:'' }}">
+                <button class="btn btn-primary rounded-pill px-4" type="submit">Qidirish</button>
+            </form>
+        </div>
+    </div>
 
     <div class="row g-4">
         {% for manzil in manzillar %}
-        <div class="col-md-4 col-sm-6">
-            <div class="card h-100 shadow border-0 overflow-hidden">
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm border-0 rounded-4">
                 {% if manzil.image %}
-                    <img src="{{ manzil.image.url }}" class="card-img-top" style="height: 220px; object-fit: cover;" alt="{{ manzil.name }}">
-                {% else %}
-                    <div class="bg-light text-center py-5" style="height: 220px; display: flex; align-items: center; justify-content: center;">
-                        <span class="text-muted">Rasm mavjud emas</span>
-                    </div>
+                    <img src="{{ manzil.image.url }}" class="card-img-top" style="height: 200px; object-fit: cover;">
                 {% endif %}
-
-                <div class="card-body d-flex flex-column p-4">
-                    <h5 class="card-title fw-bold text-dark">{{ manzil.name }}</h5>
-                    <p class="card-text text-muted flex-grow-1" style="font-size: 0.9rem;">
-                        <i class="bi bi-geo-alt text-danger"></i> {{ manzil.address }}
-                    </p>
-                    <hr class="my-3">
-                    <div class="d-flex gap-2">
-                        <a href="{% url 'manzil_detail' manzil.id %}" class="btn btn-primary flex-fill fw-bold">Batafsil</a>
-                        <a href="/" class="btn btn-outline-secondary px-3">Orqaga</a>
-                    </div>
+                <div class="card-body">
+                    <h5 class="card-title fw-bold">{{ manzil.name }}</h5>
+                    <p class="text-muted">{{ manzil.address }}</p>
+                    <a href="{% url 'manzil_detail' manzil.id %}" class="btn btn-sm btn-primary">Batafsil</a>
                 </div>
             </div>
         </div>
         {% empty %}
-        <div class="col-12 text-center">
-            <div class="alert alert-info">Hozircha {{ category.name }} bo'limida ma'lumotlar mavjud emas.</div>
-        </div>
+            <p class="text-center">Ma'lumot topilmadi.</p>
         {% endfor %}
     </div>
 </div>

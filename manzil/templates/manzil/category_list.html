@@ -1,15 +1,25 @@
 {% extends 'manzil/base.html' %}
-
 {% block content %}
+<div class="row justify-content-center mt-5">
+    <div class="col-md-8">
+        <h2 class="text-center mb-4 fw-bold text-primary">Chirchiq Shahri Manzillari</h2>
 
-<h3>Kategoriyalar</h3>
+        <form action="{% url 'category_list' %}" method="GET" class="mb-5 shadow-sm p-3 bg-white rounded-4">
+            <div class="input-group">
+                <input type="text" name="q" class="form-control border-0 bg-light" placeholder="Masalan: 21-maktab yoki Shifoxona..." value="{{ query|default:'' }}">
+                <button class="btn btn-primary px-4 rounded-pill ms-2" type="submit">Qidirish</button>
+            </div>
+        </form>
 
-{% for category in categories %}
-<p>
-    <a href="{% url 'manzil_list' category.id %}">
-        {{ category.name }}
-    </a>
-</p>
-{% endfor %}
-
+        <h4 class="mb-3 fw-semibold">Kategoriyalar</h4>
+        <div class="list-group shadow-sm rounded-4 overflow-hidden">
+            {% for category in categories %}
+                <a href="{% url 'manzil_list' category.id %}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center py-3">
+                    <span>{{ category.name }}</span>
+                    <span class="badge bg-primary rounded-pill">Ko'rish</span>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
 {% endblock %}
